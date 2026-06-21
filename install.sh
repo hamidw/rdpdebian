@@ -6,8 +6,8 @@ OS_ID=$(source /etc/os-release && echo "$ID")
 
 # Hapus branding provider
 
-rm -f /etc/profile.d/99-idcloudhost-motd.sh
-rm -f /etc/profile.d/motd.sh
+rm -rf /etc/profile.d/99-idcloudhost-motd.sh
+rm -rf /etc/profile.d/motd.sh
 
 # Hapus banner login
 
