@@ -16,9 +16,12 @@ rm -f /etc/update-motd.d/10-help-text
 echo "" > /etc/issue
 echo "" > /etc/issue.net
 
-# Disable SSH banner
-
-#sed -i 's/^#?Banner.*/Banner none/' /etc/ssh/sshd_config
+# Disable SSH banner safely
+if grep -q "^Banner" /etc/ssh/sshd_config; then
+    sed -i 's|^Banner.*|Banner none|' /etc/ssh/sshd_config
+else
+    echo "Banner none" >> /etc/ssh/sshd_config
+fi
 
 # Download dashboard sesuai OS
 
