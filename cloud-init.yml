@@ -1,0 +1,49 @@
+#cloud-config
+
+runcmd:
+  - |
+    OS_ID=$(source /etc/os-release && echo $ID)
+
+    # Hapus dashboard provider umum
+    rm -f /etc/profile.d/99-idcloudhost-motd.sh
+    rm -f /etc/profile.d/motd.sh
+
+    # Hilangkan banner login
+    echo "" > /etc/issue
+    echo "" > /etc/issue.net
+    # Hilangkan tulisan khusus di opensuse
+    echo "" > /etc/motd
+
+    # Nonaktifkan SSH banner
+    sed -i 's|^Banner.*|Banner none|g' /etc/ssh/sshd_config
+    sed -i 's|^#Banner.*|Banner none|g' /etc/ssh/sshd_config
+
+    # Pilih dashboard sesuai distro
+    case "$OS_ID" in
+      ubuntu|debian)
+        SCRIPT_URL="https://raw.githubusercontent.com/hamidw/osimpu-cloudinit/main/vps_linux/osimpu_ubuntu.sh"
+        ;;
+      almalinux|rocky)
+        SCRIPT_URL="https://raw.githubusercontent.com/hamidw/osimpu-cloudinit/main/vps_linux/osimpu_almalinux.sh"
+        ;;
+      fedora)
+        SCRIPT_URL="https://raw.githubusercontent.com/hamidw/osimpu-cloudinit/main/vps_linux/osimpu_fedora.sh"
+        ;;
+      opensuse-leap|opensuse-tumbleweed|opensuse)
+        SCRIPT_URL="https://raw.githubusercontent.com/hamidw/osimpu-cloudinit/main/vps_linux/osimpu_suse.sh"
+        ;;
+      *)
+        SCRIPT_URL="https://raw.githubusercontent.com/hamidw/osimpu-cloudinit/main/vps_linux/osimpu_ubuntu.sh"
+        ;;
+    esac
+
+    # Download dashboard
+    curl -fsSL "$SCRIPT_URL" -o /etc/profile.d/osimpu.sh
+    chmod +x /etc/profile.d/osimpu.sh
+
+    # Hilangkan MOTD Ubuntu jika ada
+    touch /root/.hushlogin
+
+    # Restart SSH
+    systemctl restart ssh 2>/dev/null || true
+    systemctl restart sshd 2>/dev/null || true
