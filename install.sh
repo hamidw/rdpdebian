@@ -32,8 +32,11 @@ DASHBOARD_URL="https://raw.githubusercontent.com/hamidw/osimpu-cloudinit/main/vp
 debian)
 DASHBOARD_URL="https://raw.githubusercontent.com/hamidw/osimpu-cloudinit/main/vps_linux/osimpu_debian.sh"
 ;;
-almalinux|rocky)
+almalinux)
 DASHBOARD_URL="https://raw.githubusercontent.com/hamidw/osimpu-cloudinit/main/vps_linux/osimpu_almalinux.sh"
+;;
+rocky)
+DASHBOARD_URL="https://raw.githubusercontent.com/hamidw/osimpu-cloudinit/main/vps_linux/osimpu_rocky.sh"
 ;;
 fedora)
 DASHBOARD_URL="https://raw.githubusercontent.com/hamidw/osimpu-cloudinit/main/vps_linux/osimpu_fedora.sh"
