@@ -15,7 +15,7 @@ BAR_WIDTH=15
 
 HOSTNAME=$(hostname)
 
-# OS INFO (Ubuntu safe)
+# OS INFO (Debian safe)
 if [ -f /etc/os-release ]; then
     . /etc/os-release
     OS_NAME="$PRETTY_NAME"
@@ -77,7 +77,7 @@ draw_bar() {
 clear
 
 echo -e "${GREEN}"
-echo " ${ICON_INFO} osimpu.com | UBUNTU OS Dashboard"
+echo " ${ICON_INFO} osimpu.com | DEBIAN OS Dashboard"
 echo -e "${NC}========================================================"
 
 echo -e " ${WHITE}Hostname${NC}     : ${HOSTNAME}"
