@@ -53,7 +53,7 @@ esac
 curl -fsSL "$DASHBOARD_URL" -o /etc/profile.d/osimpu.sh
 chmod +x /etc/profile.d/osimpu.sh
 
-touch /root/.hushlogin
+# touch /root/.hushlogin
 
 systemctl restart ssh 2>/dev/null || true
 systemctl restart sshd 2>/dev/null || true
